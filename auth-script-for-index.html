@@ -1,0 +1,24 @@
+<!-- 
+    INSTRUCCIONES: Agrega este script DENTRO del <head> de index.html
+    Justo ANTES de </head>
+-->
+
+<!-- Verificación de Autenticación -->
+<script>
+    // Verificar autenticación antes de cargar la página
+    (async function checkAuth() {
+        try {
+            const response = await fetch('/Gogleanty/api/auth.php?action=check');
+            const result = await response.json();
+
+            if (!result.authenticated) {
+                // No autenticado - redirigir a login
+                window.location.href = '/Gogleanty/login.html';
+            }
+        } catch (error) {
+            console.error('Error verificando autenticación:', error);
+            // En caso de error, redirigir a login por seguridad
+            window.location.href = '/Gogleanty/login.html';
+        }
+    })();
+</script>

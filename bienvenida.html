@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a Gogleanty - Instalación</title>
+    <link rel="icon" href="favicosn.png" type="image/png">
+    <link rel="preconnect" href=https://fonts.googleapis.com">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .step h3 {
+            display: inline-block;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #666;
+            margin-left: 44px;
+            line-height: 1.6;
+        }
+
+        .checklist {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .checklist h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            color: #856404;
+        }
+
+        .checklist-item input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .success {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .emoji {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📸 Gogleanty</h1>
+            <p>Tu galería de fotos personal y local</p>
+        </div>
+
+        <div class="content">
+            <div class="success">
+                <strong>✅ ¡Archivos copiados correctamente!</strong><br>
+                Ahora necesitas completar la instalación siguiendo estos pasos.
+            </div>
+
+            <div class="checklist">
+                <h3><span class="emoji">⚠️</span> Antes de continuar, verifica:</h3>
+                <label class="checklist-item">
+                    <input type="checkbox" id="check1" onchange="updateButton()">
+                    <span>XAMPP está instalado en tu computadora</span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" id="check2" onchange="updateButton()">
+                    <span>El Panel de Control de XAMPP está abierto</span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" id="check3" onchange="updateButton()">
+                    <span>Apache está iniciado (botón verde en XAMPP)</span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" id="check4" onchange="updateButton()">
+                    <span>MySQL está iniciado (botón verde en XAMPP)</span>
+                </label>
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Abre XAMPP Control Panel</h3>
+                <p>Si no lo tienes abierto, búscalo en el menú de inicio de Windows. Debe estar en:
+                    C:\xampp\xampp-control.exe</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Inicia Apache y MySQL</h3>
+                <p>En el panel de XAMPP, haz clic en "Start" junto a Apache y MySQL. Espera a que ambos estén en verde.
+                </p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Ejecuta el instalador</h3>
+                <p>Una vez que Apache y MySQL estén activos, haz clic en el botón de abajo para ejecutar el script de
+                    instalación automática.</p>
+            </div>
+
+            <div class="warning" id="warning" style="display: none;">
+                <strong>⚠️ Importante:</strong> Si ves un error de conexión, asegúrate de que MySQL esté ejecutándose en
+                XAMPP.
+            </div>
+
+            <div class="button-container">
+                <a href="setup.php" class="btn" id="installBtn" onclick="return confirmInstall()">
+                    🚀 Ejecutar Instalación
+                </a>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: #e7f3ff; border-radius: 8px;">
+                <h3 style="color: #004085; margin-bottom: 10px;">💡 ¿Qué hará el instalador?</h3>
+                <ul style="color: #004085; margin-left: 20px; line-height: 1.8;">
+                    <li>Crear la base de datos automáticamente</li>
+                    <li>Crear todas las tablas necesarias</li>
+                    <li>Configurar los directorios de uploads</li>
+                    <li>Generar el archivo de configuración (.env)</li>
+                    <li>Preparar todo para que empieces a usar la aplicación</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Gogleanty</strong> - Tu galería de fotos local y privada</p>
+            <p style="margin-top: 5px; font-size: 12px;">Versión 1.0 | 100% Local | Sin conexión a internet</p>
+        </div>
+    </div>
+
+    <script>
+        function updateButton() {
+            const check1 = document.getElementById('check1').checked;
+            const check2 = document.getElementById('check2').checked;
+            const check3 = document.getElementById('check3').checked;
+            const check4 = document.getElementById('check4').checked;
+
+            const allChecked = check1 && check2 && check3 && check4;
+            const btn = document.getElementById('installBtn');
+
+            if (allChecked) {
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+                document.getElementById('warning').style.display = 'none';
+            } else {
+                btn.style.opacity = '0.5';
+                btn.style.pointerEvents = 'none';
+            }
+        }
+
+        function confirmInstall() {
+            const allChecked =
+                document.getElementById('check1').checked &&
+                document.getElementById('check2').checked &&
+                document.getElementById('check3').checked &&
+                document.getElementById('check4').checked;
+
+            if (!allChecked) {
+                alert('Por favor, verifica todos los elementos de la lista antes de continuar.');
+                return false;
+            }
+
+            return confirm('¿Estás listo para instalar Gogleanty?\n\nEsto creará la base de datos y configurará la aplicación.');
+        }
+
+        // Inicializar estado del botón
+        updateButton();
+    </script>
+</body>
+
+</html>

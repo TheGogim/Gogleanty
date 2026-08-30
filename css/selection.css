@@ -1,0 +1,118 @@
+/* Selection Mode */
+.photo-item.selection-mode {
+    cursor: pointer;
+}
+
+.photo-item .select-checkbox {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.photo-item.selected .select-checkbox {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.photo-item.selected .select-checkbox::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.photo-item.selected img,
+.photo-item.selected video {
+    transform: scale(0.9);
+}
+
+.photo-item.selected::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(102, 126, 234, 0.2);
+    border: 4px solid var(--primary-color);
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 15;
+}
+
+/* Bulk Action Bar */
+.bulk-action-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.bulk-action-bar.active {
+    transform: translateY(0);
+}
+
+.bulk-actions-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.bulk-actions-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.close-selection-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--text-secondary);
+}
+
+.close-selection-btn:hover {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+}
+
+.delete-selected-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.delete-selected-btn:hover {
+    background: #ff6b81;
+    transform: translateY(-1px);
+}

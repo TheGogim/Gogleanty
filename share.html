@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álbum Compartido - Gogleanty</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/share.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="share-header">
+        <div class="header-content" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" fill="url(#gradient1)" />
+                    <path d="M16 8L12 14H20L16 8Z" fill="white" opacity="0.9" />
+                    <circle cx="16" cy="20" r="3" fill="white" opacity="0.9" />
+                    <defs>
+                        <linearGradient id="gradient1" x1="0" y1="0" x2="32" y2="32">
+                            <stop offset="0%" stop-color="#667eea" />
+                            <stop offset="100%" stop-color="#764ba2" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Gogleanty</h1>
+            </div>
+
+            <div class="header-actions" style="display: flex; gap: 10px; align-items: center;">
+                <button id="loginBtn" class="unlock-btn"
+                    style="padding: 8px 16px; font-size: 14px; width: auto; display: none;">
+                    Iniciar Sesión
+                </button>
+                <div id="userInfo" style="display: none; align-items: center; gap: 10px;">
+                    <span id="userEmailDisplay" style="font-size: 14px; color: #5f6368; font-weight: 500;"></span>
+                    <button id="uploadBtn" class="unlock-btn"
+                        style="padding: 8px 16px; font-size: 14px; width: auto; display: none;">
+                        Subir Fotos
+                    </button>
+                    <button id="logoutBtn"
+                        style="background: none; border: 1px solid #dadce0; color: #5f6368; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px;">
+                        Salir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading State -->
+    <div class="loading-container" id="loadingContainer">
+        <div class="spinner"></div>
+        <p>Cargando álbum...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-container" id="errorContainer" style="display: none;">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="50" stroke="#ff4757" stroke-width="4" fill="none" />
+            <path d="M60 30 L60 70" stroke="#ff4757" stroke-width="6" stroke-linecap="round" />
+            <circle cx="60" cy="90" r="4" fill="#ff4757" />
+        </svg>
+        <h2 id="errorTitle">Enlace no encontrado</h2>
+        <p id="errorMessage">Este enlace puede haber expirado o no existe.</p>
+    </div>
+
+    <!-- Album Content -->
+    <div class="album-container" id="albumContainer" style="display: none;">
+        <!-- Album Info -->
+        <div class="album-info">
+            <h2 id="albumName"></h2>
+            <p id="albumDescription"></p>
+            <div class="album-meta">
+                <span id="mediaCount"></span>
+                <span id="viewCount"></span>
+            </div>
+        </div>
+
+        <!-- Media Grid -->
+        <div class="media-grid" id="mediaGrid">
+            <!-- Media items will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Media Modal -->
+    <div class="modal" id="mediaModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+
+            <div class="modal-body">
+                <div class="media-viewer">
+                    <button class="nav-arrow nav-prev" id="navPrev">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+
+                    <div class="media-display" id="mediaDisplay">
+                        <!-- Media will be inserted here -->
+                    </div>
+
+                    <button class="nav-arrow nav-next" id="navNext">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warning Overlay (para capturas de pantalla) -->
+    <div class="warning-overlay" id="warningOverlay" style="display: none;">
+        <div class="warning-content">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="35" stroke="#ff4757" stroke-width="4" />
+                <path d="M40 20 L40 50" stroke="#ff4757" stroke-width="6" stroke-linecap="round" />
+                <circle cx="40" cy="65" r="4" fill="#ff4757" />
+            </svg>
+            <h3>Contenido Protegido</h3>
+            <p>Este contenido está protegido contra capturas de pantalla</p>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal" style="z-index: 10001;">
+        <div class="modal-overlay" id="loginOverlay"></div>
+        <div class="modal-content" style="display: flex; align-items: center; justify-content: center;">
+            <div
+                style="background: white; padding: 32px; border-radius: 16px; width: 100%; max-width: 400px; position: relative;">
+                <button id="loginClose"
+                    style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: #5f6368;">&times;</button>
+                <h3 style="margin-bottom: 24px; text-align: center; color: var(--text-color);">Iniciar Sesión</h3>
+
+                <div style="margin-bottom: 16px;">
+                    <input type="text" id="loginUser" placeholder="Usuario o Correo"
+                        style="width: 100%; padding: 12px; border: 1px solid #dadce0; border-radius: 8px; font-size: 14px;">
+                </div>
+                <div style="margin-bottom: 24px;">
+                    <input type="password" id="loginPass" placeholder="Contraseña"
+                        style="width: 100%; padding: 12px; border: 1px solid #dadce0; border-radius: 8px; font-size: 14px;">
+                </div>
+
+                <button id="doLoginBtn" class="unlock-btn" style="width: 100%;">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Progress -->
+    <div id="uploadProgress"
+        style="position: fixed; bottom: 20px; right: 20px; background: white; padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; z-index: 10002; width: 300px;">
+        <div
+            style="margin-bottom: 8px; font-weight: 500; font-size: 14px; display: flex; justify-content: space-between;">
+            <span id="uploadFileName">Subiendo archivo...</span>
+            <span id="uploadPercent">0%</span>
+        </div>
+        <div style="width: 100%; height: 4px; background: #f1f3f4; border-radius: 2px; overflow: hidden;">
+            <div id="progressFill"
+                style="width: 0%; height: 100%; background: var(--primary-color); transition: width 0.2s;"></div>
+        </div>
+    </div>
+
+    <input type="file" id="shareFileInput" multiple style="display: none;">
+
+    <script src="js/share.js"></script>
+</body>
+
+</html>
