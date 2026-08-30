@@ -9,16 +9,10 @@ RewriteRule ^api/(.*)$ api/index.php [QSA,L]
 # Pasar cabeceras Authorization a PHP
 SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
-# Configuración de seguridad
-<FilesMatch "\.(env|log)$">
-    Order allow,deny
-    Deny from all
+# Configuración de seguridad (sintaxis Apache 2.4)
+<FilesMatch "\.(env|log|sql|md|ini|bat|sh)$">
+    Require all denied
 </FilesMatch>
-
-# Habilitar CORS para desarrollo local
-Header set Access-Control-Allow-Origin "*"
-Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-Header set Access-Control-Allow-Headers "Content-Type, Authorization"
 
 # Configuración de tipos MIME
 AddType image/webp .webp
